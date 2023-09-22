@@ -226,12 +226,12 @@ const SongPage = ({isAuthenticated, userId, userLikedSongs}) => {
                   ) : isAdded ? (
                     'Song added to favorites'
                   ) : isLiked ? (
-                    <a onClick={removeFromFavorites}>
+                    <a href="#" onClick={removeFromFavorites}>
                       {/* <a href="#!"> */}
                       Remove from favorites
                     </a>
                   ) : (
-                    <a onClick={addToFavorites}>
+                    <a href="#" onClick={addToFavorites}>
                       📌Add to favorites
                     </a>
                   )

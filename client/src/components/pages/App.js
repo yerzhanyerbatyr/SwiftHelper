@@ -10,6 +10,7 @@ import SongPage from './SongPage';
 import Login from './LogIn';
 import Register from './Register';
 import User from './UserAccount';
+import RecomSong from './RecomSong';
 import {Routes, Route} from 'react-router-dom';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
@@ -66,6 +67,7 @@ function App() {
         <Route path="/about" element = {<About></About>}></Route>
         <Route path="/tv-search" element = {<GetTV></GetTV>}></Route>
         <Route path="/random-song" element = {<GetSong></GetSong>}></Route>
+        <Route path="/recommended-song" element = {<RecomSong userId={id}></RecomSong>}></Route>
         <Route path="/random-quote" element = {<GetQuote></GetQuote>}></Route>
         <Route path="/song" element = {<SongPage isAuthenticated={isAuthenticated} userId={id} userLikedSongs={likedSongs}></SongPage>}></Route>
         <Route path="/login" element = {<Login></Login>}></Route>

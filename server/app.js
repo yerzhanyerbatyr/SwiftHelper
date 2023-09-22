@@ -11,6 +11,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const { getSongByName } = require('./controllers/spotySearch');
+const { TextServiceClient } =
+  require("@google-ai/generativelanguage").v1beta2;
+
+const { GoogleAuth } = require("google-auth-library");
+const API_KEY = process.env.PALMAPI_KEY;
+const client = new TextServiceClient({
+    authClient: new GoogleAuth().fromAPIKey(API_KEY),
+});
 
 const app = express();
 
@@ -31,6 +39,7 @@ app.use(session({
 app.use(cookieParser(process.env.SECRETKEY));
 app.use(passport.initialize());
 app.use(passport.session());
+
 require('./controllers/passportConfid')(passport);
 
 readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/' + route)));
@@ -50,7 +59,6 @@ const server = () => {
                     return res.status(401).json({ error: 'Login failed' });
                 }
                 res.status(200).json({ message: 'Login successfull' });
-                console.log(req.user);
             });
         })(req,res,next);
     })
@@ -85,7 +93,6 @@ const server = () => {
             .catch((err)=>{
                 throw err;
             });
-        console.log(req.body);
     });
     app.get("/user",(req,res)=>{
         if (req.user && req.user.username) {
@@ -144,7 +151,7 @@ const server = () => {
             return res.status(500).json({ message: 'Internal server error' });
         }
     });
-    app.get('/user/:userId/likedSongs', async (req, res) => {
+    app.get('/user/:userId/recommendSong', async (req, res) => {
         try {
             const {userId} = req.params;
             const user = await User.findById(userId).populate('likedSongs');
@@ -153,9 +160,29 @@ const server = () => {
                 return res.status(404).json({ message: 'User not found' });
             }
 
-            const likedSongs = user.likedSongs;
-    
-            return res.status(200).json({ likedSongs });
+            const likedSongs = await user.likedSongs.map(song => song.songTitle);
+            const likedSongsString = likedSongs.join('", "');
+            const prompt = `Recommend one Taylor Swift song similar to "${likedSongsString}" but only from the albums "Speak Now," "Fearless," "Red," "Lover," "Midnights," "folklore," or "evermore." Exclude songs from "Reputation," "1989," and "Taylor Swift" album, and song "Style. Please provide only the song title.`;
+
+            client
+            .generateText({
+            model: "models/text-bison-001",
+            temperature: 0.8,
+            candidateCount: 1,
+            prompt: {
+                text: prompt,
+            },
+            })
+            .then((result) => {
+            result.forEach((d1)=>{
+                if (d1 != null){
+                    d1.candidates.forEach(function(d2){
+                        const recommendedSong = d2.output;
+                        return res.status(200).json({ recommendedSong });  
+                    })
+                }
+            })
+            });
         } catch (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal server error' });

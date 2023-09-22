@@ -56,7 +56,7 @@ function User({isAuthenticated, userId, userLikedSongs}) {
             />
             <TSButton 
                 content={"Generate a recomended song"} 
-                hyperLink = {"/random-song"} 
+                hyperLink = {"/recommended-song"} 
             />
             <TSButton 
                 content={"Get Swift's Quote of the Day"} 
