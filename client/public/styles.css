@@ -1,0 +1,174 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    /* background-color: #C5DFF8; */
+    background-color: #eeeeee;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+header {
+    display: flex;
+    /* background: linear-gradient(to bottom,  #4A55A2,  #38407A); */
+    background: #4d4d4d;
+    justify-content: space-between;
+    padding: 10px 32px;
+    margin-left: -16px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 0 10px 0 rgba(154, 138, 138, 0.3);
+}
+
+header h1 {
+    color: #eeeeee;
+    font-weight: 200;
+    font-size: 2rem;
+}
+
+header a{
+    color: #eeeeee;
+    font-size: 1.3rem;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+
+.navbar-item:hover{
+    color: #abaaaa;
+}
+
+footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+}
+footer p {
+    color: #4d4d4d;
+}
+
+a {
+    color: #4d4d4d;
+    text-decoration: none;
+}
+
+.siteDesc{
+    text-align: center;
+    font-size: 1.5rem;
+    color: #4d4d4d;
+}
+
+a.button-TV{
+    background-color:#495049;
+    color: #ffffff;
+    font-size: 20px;
+    font-style: normal;
+    text-decoration: none;
+    padding: 16px 24px;
+    border: 0px solid #000;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    /* width: 350px; */
+}
+a.button-TV:hover{
+    background-color: #b0b0b0;
+}
+
+.centeredPage {
+    display: flex;
+    flex-direction:  column;
+    align-items: center;
+    gap: 20px;
+    > h1 {
+        text-align: center;
+    }
+}
+.centeredDiv {
+    width: 80%;
+    text-align: center;
+}
+
+.gifWidth {
+    width: 450px;
+    height: 260px;
+    object-fit: cover;
+}
+
+.circle-img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+input{
+    margin-top: 15px;
+    font-size: 1.3rem;
+    width: 350px;
+}
+
+.col-12 {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 15px;
+}
+.textbox-12 {
+    background-color: #eeeeee;
+    border: 0;
+    padding: 2px 0;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+}
+.textbox-12 ~ .focus-border-12 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #4d4d4d;
+    transition: 0.4s;
+}
+.textbox-12:focus ~ .focus-border-12 {
+    width: 100%;
+    transition: 0.4s;
+    left: 0;
+}
+
+.button-flex{
+    display: flex;
+    gap: 15px;
+}
+
+.songPage {
+    display: flex;
+    flex-direction:  column;
+    align-items: center;
+    gap: 10px;
+    > h1 {
+        text-align: center;
+    }
+}
+
+button {
+    background-color:#495049;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #b0b0b0;
+  }
